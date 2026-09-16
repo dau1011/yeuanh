@@ -55,7 +55,7 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    overflow: hidden; /* Cắt góc thừa của cọc bài */
+    overflow: hidden; 
     object-fit: cover;
     box-shadow: -2px 2px 8px rgba(0,0,0,0.6);
 }
@@ -72,7 +72,8 @@ body {
     transform-origin: center 220%; 
     cursor: pointer;
     transform-style: preserve-3d;
-    transform: rotateZ(var(--rot)); 
+    transform: rotateZ(var(--rot));
+    border-radius: 12px; /* Thêm bo góc cho khung chính */
 }
 
 .card:nth-child(2) { --rot: -48deg; z-index: 2; }
@@ -99,10 +100,15 @@ body {
     z-index: 150 !important;
 }
 
+/* KHI LẬT BÀI: Xóa hào quang ở đây để không bị lộ góc vuông */
 .card.picked {
     transform-origin: center center !important; 
     transform: rotateZ(0deg) rotateY(180deg) scale(2.2) !important;
     z-index: 200 !important;
+}
+
+/* ĐƯA HÀO QUANG VÀO ĐÂY: Áp dụng trực tiếp lên mặt bài đã bo tròn */
+.card.picked .card-face {
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
 
@@ -112,17 +118,16 @@ body {
     transform: translateY(200px) rotateZ(var(--rot)) !important;
 }
 
-/* --- XỬ LÝ TRIỆT ĐỂ LỖI 4 GÓC ĐEN --- */
 .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Sửa lỗi bóng đen trên một số máy */
+    -webkit-backface-visibility: hidden; 
     backface-visibility: hidden; 
     border-radius: 12px; 
-    overflow: hidden; /* Cây kéo thần kỳ cắt 100% mọi thứ lòi ra ngoài viền 12px */
+    overflow: hidden; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transform: translateZ(0); /* Ép card đồ họa máy tính vẽ viền chính xác hơn */
+    transform: translateZ(0); 
 }
 
 .card-face img {
@@ -134,19 +139,14 @@ body {
 
 .card-front { transform: rotateY(180deg); }
 
-/* --- ÉP VÙNG CHỮ VÀO GIỮA, NÉ HỌA TIẾT --- */
+/* CĂN CHỈNH LẠI KHUNG CHỮ: Đẩy tâm lên 42% để vừa đúng phần màu trắng be */
 .message-text {
     position: absolute;
-    /* Đẩy vùng chứa chữ xuống một tí để né họa tiết dày ở mép trên */
-    top: 53%; 
+    top: 42%;  /* <-- Tâm điểm mới, khớp tuyệt đối với vùng màu be */
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    /* Bóp vùng chữ hẹp lại để không đâm vào 2 cạnh bên */
-    width: 68%; 
-    
-    /* Ép chiều cao tối đa chỉ nằm ở phần trống giữa lá bài */
-    height: 48%; 
+    width: 72%; 
+    height: 50%; /* Giới hạn để chữ không tràn xuống phần màu đỏ */
     
     display: flex;
     align-items: center;
@@ -155,9 +155,9 @@ body {
     color: #5A0001; 
     
     font-family: 'EB Garamond', serif; 
-    font-size: 8px; /* Size 8px là an toàn nhất khi lật bài to ra */
+    font-size: 9px; /* Trả về đúng size 9px */
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 .controls {
