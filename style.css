@@ -1,105 +1,156 @@
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+/* Tải font chữ Blosta Script */
+@font-face {
+    font-family: 'Blosta Script';
+    src: url('blosta.ttf') format('truetype'); 
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    background-color: #5A0001; /* Đỏ rượu */
-    font-family: 'Playfair Display', serif; /* Font chữ lãng mạn */
+    background-image: url('bg.jpg'); 
+    background-size: cover;          
+    background-position: center;     
+    background-attachment: fixed;    
+    background-color: #5A0001;       
+    font-family: 'Playfair Display', serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .header h1 {
-    color: #FDFD96; /* Vàng pastel */
+    color: #FDFD96; 
     font-size: 26px;
-    margin-bottom: 30px;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     text-align: center;
-    letter-spacing: 1px;
+    z-index: 50;
 }
 
 .card-container {
-    width: 85vw; /* Tối ưu cho màn hình điện thoại */
-    max-width: 250px; /* Giới hạn kích thước trên laptop */
-    aspect-ratio: 2 / 3; /* Giữ chuẩn tỷ lệ khung hình lá bài */
-    perspective: 1000px; /* Chiều sâu không gian 3D */
-    margin-bottom: 40px;
+    position: relative;
+    width: 100%;
+    height: 380px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    margin-top: 10px;
 }
 
 .card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: transform 0.8s ease-in-out;
+    position: absolute;
+    width: 75px; 
+    aspect-ratio: 2 / 3;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center 250%; 
+    cursor: pointer;
     transform-style: preserve-3d;
+    transform: rotateZ(var(--rot)); 
 }
 
-/* Class được kích hoạt khi bấm nút */
-.card.flipped {
-    transform: rotateY(180deg);
+/* Xếp quạt 13 lá */
+.card:nth-child(1) { --rot: -48deg; z-index: 1; }
+.card:nth-child(2) { --rot: -40deg; z-index: 2; }
+.card:nth-child(3) { --rot: -32deg; z-index: 3; }
+.card:nth-child(4) { --rot: -24deg; z-index: 4; }
+.card:nth-child(5) { --rot: -16deg; z-index: 5; }
+.card:nth-child(6) { --rot: -8deg;  z-index: 6; }
+.card:nth-child(7) { --rot: 0deg;   z-index: 7; }
+.card:nth-child(8) { --rot: 8deg;   z-index: 8; }
+.card:nth-child(9) { --rot: 16deg;  z-index: 9; }
+.card:nth-child(10){ --rot: 24deg;  z-index: 10; }
+.card:nth-child(11){ --rot: 32deg;  z-index: 11; }
+.card:nth-child(12){ --rot: 40deg;  z-index: 12; }
+.card:nth-child(13){ --rot: 48deg;  z-index: 13; }
+
+.card:hover {
+    transform: rotateZ(var(--rot)) translateY(-25px);
+    z-index: 20 !important;
+}
+
+/* Phóng to lá bài được chọn */
+.card.picked {
+    transform: rotateY(180deg) scale(2.8) translateY(-15px) !important;
+    z-index: 30 !important;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+}
+
+.card.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(200px) rotateZ(var(--rot)) !important;
 }
 
 .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Giấu mặt phía sau khi lật */
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    backface-visibility: hidden; 
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .card-face img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 8px;
 }
 
 .card-front {
     transform: rotateY(180deg);
 }
 
-/* Chữ hiển thị đè lên ảnh mặt trước */
 .message-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 75%; /* Giữ chữ gọn gàng trong vùng nền kem */
+    width: 85%; 
     text-align: center;
-    color: #5A0001; /* Chữ màu đỏ sẫm */
-    font-size: 1.15rem;
-    font-weight: bold;
-    line-height: 1.6;
+    color: #5A0001; 
+    font-family: 'Blosta Script', cursive; 
+    font-size: 11px; 
+    line-height: 1.4;
 }
 
-.controls button {
-    background-color: transparent;
-    border: 2px solid #D4AF37; /* Viền màu Gold */
+#instructionText {
     color: #D4AF37;
-    padding: 15px 35px;
-    font-size: 16px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    font-style: italic;
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; text-shadow: 0 0 10px #D4AF37; }
+    100% { opacity: 0.7; }
+}
+
+#resetButton {
+    background-color: rgba(0, 0, 0, 0.5); 
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    padding: 12px 30px;
+    font-size: 14px;
     font-family: 'Playfair Display', serif;
     font-weight: bold;
-    border-radius: 30px; /* Bo tròn dạng viên thuốc */
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s;
+    margin-top: 15px;
+    display: none; 
     letter-spacing: 1px;
 }
 
-.controls button:hover {
+#resetButton:hover {
     background-color: #D4AF37;
     color: #5A0001;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-}
-
-.controls button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
