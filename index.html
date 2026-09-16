@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vũ Trụ Của Chúng Ta</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font chữ Serif cổ điển, lãng mạn -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,23 +13,25 @@
     </div>
     
     <div class="card-container" id="cardContainer">
-        <div class="card" id="gachaCard">
-            <!-- Mặt sau (Lúc chưa lật): Lấy ảnh 1.png từ thư mục images -->
-            <div class="card-face card-back">
-                <img src="1.png" alt="Mặt sau lá bài">
-            </div>
-            <!-- Mặt trước (Lúc lật ra): Lấy ảnh phôi 2.png và chèn chữ -->
-            <div class="card-face card-front">
-                <img src="2.png" alt="Mặt trước lá bài">
-                <div class="message-text" id="messageDisplay">
-                    <!-- Text bốc thăm sẽ tự động hiện ở đây -->
-                </div>
-            </div>
-        </div>
+        <!-- Trải 13 lá bài -->
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
     </div>
 
     <div class="controls">
-        <button id="drawButton">KẾT NỐI VŨ TRỤ</button>
+        <p id="instructionText">Hãy chạm vào một lá bài thuộc về anh...</p>
+        <button id="resetButton" onclick="resetCards()">TRỘN BÀI VÀ RÚT TIẾP</button>
     </div>
 
     <script src="script.js"></script>
