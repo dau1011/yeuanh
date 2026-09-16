@@ -24,12 +24,53 @@ const messages = [
     "Mình nghiêng về khả năng mình nhớ cún hơn, nhưng khả năng cún nhớ mình vẫn chưa bị loại trừ (chắc thế)."
 ];
 
-let isPicked = false; 
+// Khóa click ngay từ đầu để tránh người dùng bấm lúc bài đang xào
+let isPicked = true; 
 
+// TỰ ĐỘNG XÀO BÀI VÀ CHIA KHI VỪA VÀO WEB
+window.onload = () => {
+    setTimeout(shuffleAndDeal, 500); // Đợi 0.5s rồi mới bắt đầu xào cho mượt
+};
+
+// Hàm Ma Thuật: Xào và Chia Bài
+function shuffleAndDeal() {
+    const allCards = document.querySelectorAll('.card');
+    
+    // 1. Chẻ bài làm 2 nửa để xào
+    allCards.forEach((card, index) => {
+        if (index % 2 === 0) {
+            card.classList.add('shuffling-left');
+        } else {
+            card.classList.add('shuffling-right');
+        }
+    });
+
+    // 2. Đợi xào xong (1 giây) thì bắt đầu chia bài
+    setTimeout(() => {
+        allCards.forEach((card, index) => {
+            // Dừng hiệu ứng xào
+            card.classList.remove('shuffling-left', 'shuffling-right');
+            
+            // Chia lần lượt từng lá một tạo thành hình quạt (mỗi lá cách nhau 80ms)
+            setTimeout(() => {
+                card.classList.remove('stacked');
+            }, index * 80); 
+        });
+
+        // Mở khóa click sau khi lá bài cuối cùng đã chia xong
+        setTimeout(() => {
+            isPicked = false;
+        }, allCards.length * 80 + 300); 
+
+    }, 1000);
+}
+
+// Hàm Bốc Bài
 function pickCard(selectedCard) {
-    if (isPicked) return;
+    if (isPicked) return; // Nếu đang bị khóa (đang xào bài hoặc đã bốc rồi) thì bỏ qua
     isPicked = true;
 
+    // Font EB Garamond sẽ tự động áp dụng do đã cài trong CSS
     document.getElementById('instructionText').innerText = "Vũ trụ đã hồi đáp...";
 
     const randomMsg = messages[Math.floor(Math.random() * messages.length)];
@@ -49,14 +90,24 @@ function pickCard(selectedCard) {
     }, 1500);
 }
 
+// Hàm Trộn & Rút Tiếp
 function resetCards() {
-    isPicked = false; 
+    isPicked = true; // Khóa click trong lúc thu bài
     
-    document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
+    document.getElementById('instructionText').innerText = "Đang kết nối lại với vũ trụ...";
     document.getElementById('resetButton').style.display = 'none';
 
     const allCards = document.querySelectorAll('.card');
+    
+    // Thu toàn bộ bài đang bay lả tả về lại thành 1 cọc
     allCards.forEach(card => {
         card.classList.remove('picked', 'hidden');
+        card.classList.add('stacked');
     });
+
+    // Đợi 0.6s cho bài thu về giữa xong thì chạy hiệu ứng xào và chia
+    setTimeout(() => {
+        document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
+        shuffleAndDeal();
+    }, 600);
 }
