@@ -24,53 +24,36 @@ const messages = [
     "Mình nghiêng về khả năng mình nhớ cún hơn, nhưng khả năng cún nhớ mình vẫn chưa bị loại trừ (chắc thế)."
 ];
 
-// Khóa click ngay từ đầu để tránh người dùng bấm lúc bài đang xào
+// Khóa bấm khi mới vào web để chạy hiệu ứng chia bài
 let isPicked = true; 
 
-// TỰ ĐỘNG XÀO BÀI VÀ CHIA KHI VỪA VÀO WEB
 window.onload = () => {
-    setTimeout(shuffleAndDeal, 500); // Đợi 0.5s rồi mới bắt đầu xào cho mượt
+    // Đợi 0.5s rồi phát bài bay từ cọc ra
+    setTimeout(dealCards, 500); 
 };
 
-// Hàm Ma Thuật: Xào và Chia Bài
-function shuffleAndDeal() {
+// Hàm Ma Thuật: Phát bài từ cọc (Dealing)
+function dealCards() {
     const allCards = document.querySelectorAll('.card');
     
-    // 1. Chẻ bài làm 2 nửa để xào
+    // Rút từng lá từ cọc bên phải phóng ra thành hình quạt
     allCards.forEach((card, index) => {
-        if (index % 2 === 0) {
-            card.classList.add('shuffling-left');
-        } else {
-            card.classList.add('shuffling-right');
-        }
+        setTimeout(() => {
+            card.classList.remove('stacked');
+        }, index * 90); // Mỗi lá bay ra cách nhau 0.09 giây
     });
 
-    // 2. Đợi xào xong (1 giây) thì bắt đầu chia bài
+    // Sau khi lá cuối cùng bay ra xong thì mới cho phép người dùng bốc bài
     setTimeout(() => {
-        allCards.forEach((card, index) => {
-            // Dừng hiệu ứng xào
-            card.classList.remove('shuffling-left', 'shuffling-right');
-            
-            // Chia lần lượt từng lá một tạo thành hình quạt (mỗi lá cách nhau 80ms)
-            setTimeout(() => {
-                card.classList.remove('stacked');
-            }, index * 80); 
-        });
-
-        // Mở khóa click sau khi lá bài cuối cùng đã chia xong
-        setTimeout(() => {
-            isPicked = false;
-        }, allCards.length * 80 + 300); 
-
-    }, 1000);
+        document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
+        isPicked = false;
+    }, allCards.length * 90 + 400); 
 }
 
-// Hàm Bốc Bài
 function pickCard(selectedCard) {
-    if (isPicked) return; // Nếu đang bị khóa (đang xào bài hoặc đã bốc rồi) thì bỏ qua
+    if (isPicked) return; 
     isPicked = true;
 
-    // Font EB Garamond sẽ tự động áp dụng do đã cài trong CSS
     document.getElementById('instructionText').innerText = "Vũ trụ đã hồi đáp...";
 
     const randomMsg = messages[Math.floor(Math.random() * messages.length)];
@@ -90,24 +73,23 @@ function pickCard(selectedCard) {
     }, 1500);
 }
 
-// Hàm Trộn & Rút Tiếp
 function resetCards() {
-    isPicked = true; // Khóa click trong lúc thu bài
+    isPicked = true; 
     
-    document.getElementById('instructionText').innerText = "Đang kết nối lại với vũ trụ...";
+    document.getElementById('instructionText').innerText = "Đang gom bài lại...";
     document.getElementById('resetButton').style.display = 'none';
 
     const allCards = document.querySelectorAll('.card');
     
-    // Thu toàn bộ bài đang bay lả tả về lại thành 1 cọc
+    // Trả tất cả bài về lại cọc bên tay phải
     allCards.forEach(card => {
         card.classList.remove('picked', 'hidden');
         card.classList.add('stacked');
     });
 
-    // Đợi 0.6s cho bài thu về giữa xong thì chạy hiệu ứng xào và chia
+    // Đợi 0.7s để gom bài xong thì xòe ra lại
     setTimeout(() => {
-        document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
-        shuffleAndDeal();
-    }, 600);
+        document.getElementById('instructionText').innerText = "Đang chia bài...";
+        dealCards();
+    }, 700);
 }
