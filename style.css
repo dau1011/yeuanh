@@ -32,7 +32,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 500px;
-    height: 480px; /* Tăng không gian để bài lật lên không bị đụng trần */
+    height: 480px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,72 +40,46 @@ body {
     z-index: 100; 
 }
 
-/* --- CỌC BÀI GỐC BÊN TAY PHẢI --- */
-.deck-pile {
-    position: absolute;
-    width: 100px; /* Bằng size bài lúc xòe */
-    height: 150px;
-    /* Đặt góc dưới bên phải */
-    transform: translate(100px, 80px) rotateZ(12deg); 
-    z-index: 1; 
-}
-.dummy-card {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: -2px 2px 8px rgba(0,0,0,0.6);
-}
-/* Hiệu ứng các lá bài xếp chồng lên nhau có độ dày */
-.dummy-card:nth-child(1) { transform: translate(6px, 6px) rotate(3deg); }
-.dummy-card:nth-child(2) { transform: translate(4px, 4px) rotate(1deg); }
-.dummy-card:nth-child(3) { transform: translate(2px, 2px) rotate(-1deg); }
-.dummy-card:nth-child(4) { transform: translate(0, 0) rotate(0deg); }
-
-/* --- CÁC LÁ BÀI RÚT --- */
 .card {
     position: absolute;
-    width: 100px; /* TĂNG SIZE BÀI XÒE */
+    width: 100px; 
     aspect-ratio: 2 / 3;
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-origin: center 220%; /* Trục xoay tối ưu để xòe đều */
+    transform-origin: center 220%; 
     cursor: pointer;
     transform-style: preserve-3d;
     transform: rotateZ(var(--rot)); 
 }
 
 /* Các góc xòe bài */
-.card:nth-child(2) { --rot: -48deg; z-index: 2; }
-.card:nth-child(3) { --rot: -40deg; z-index: 3; }
-.card:nth-child(4) { --rot: -32deg; z-index: 4; }
-.card:nth-child(5) { --rot: -24deg; z-index: 5; }
-.card:nth-child(6) { --rot: -16deg; z-index: 6; }
-.card:nth-child(7) { --rot: -8deg;  z-index: 7; }
-.card:nth-child(8) { --rot: 0deg;   z-index: 8; }
-.card:nth-child(9) { --rot: 8deg;   z-index: 9; }
-.card:nth-child(10){ --rot: 16deg;  z-index: 10; }
-.card:nth-child(11){ --rot: 24deg;  z-index: 11; }
-.card:nth-child(12){ --rot: 32deg;  z-index: 12; }
-.card:nth-child(13){ --rot: 40deg;  z-index: 13; }
-.card:nth-child(14){ --rot: 48deg;  z-index: 14; }
+.card:nth-child(1) { --rot: -48deg; z-index: 1; }
+.card:nth-child(2) { --rot: -40deg; z-index: 2; }
+.card:nth-child(3) { --rot: -32deg; z-index: 3; }
+.card:nth-child(4) { --rot: -24deg; z-index: 4; }
+.card:nth-child(5) { --rot: -16deg; z-index: 5; }
+.card:nth-child(6) { --rot: -8deg;  z-index: 6; }
+.card:nth-child(7) { --rot: 0deg;   z-index: 7; }
+.card:nth-child(8) { --rot: 8deg;   z-index: 8; }
+.card:nth-child(9) { --rot: 16deg;  z-index: 9; }
+.card:nth-child(10){ --rot: 24deg;  z-index: 10; }
+.card:nth-child(11){ --rot: 32deg;  z-index: 11; }
+.card:nth-child(12){ --rot: 40deg;  z-index: 12; }
+.card:nth-child(13){ --rot: 48deg;  z-index: 13; }
 
-/* TRẠNG THÁI CHƯA CHIA: Nằm đúng ngay cọc bài gốc */
+/* TRẠNG THÁI CHƯA CHIA: Bị đẩy xa tít mù ra góc dưới bên phải */
 .card.stacked {
-    transform: translate(100px, 80px) rotateZ(12deg) !important;
+    transform: translate(250px, 300px) rotateZ(30deg) !important;
     z-index: 10 !important;
 }
 
-/* Lướt chuột */
 .card:hover:not(.stacked) {
     transform: rotateZ(var(--rot)) translateY(-15px) scale(1.05);
     z-index: 150 !important;
 }
 
-/* KHI BỊ CHỌN: Căn chỉnh lại để đứng giữa màn hình hoàn hảo */
+/* KHI BỊ CHỌN: Hạ trọng tâm xuống thấp hơn để ko đụng Header */
 .card.picked {
-    /* Ép rotateZ(0deg) để bài đứng thẳng, scale(2.1) để vừa vặn ko bị lẹm viền */
-    transform: rotateZ(0deg) rotateY(180deg) scale(2.0) translateY(-20px) !important;
+    transform: rotateZ(0deg) rotateY(180deg) scale(2.2) translateY(10px) !important;
     z-index: 200 !important;
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
@@ -134,24 +108,23 @@ body {
 
 .card-front { transform: rotateY(180deg); }
 
-/* KHẮC PHỤC LỖI FONT VÀ TRÀN CHỮ */
+/* CHỮ TRÊN LÁ BÀI: Size 12, Font EB Garamond */
 .message-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 85%; 
+    width: 80%; 
     height: 75%; 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #5A0001; 
-    font-family: 'Dancing Script', cursive; /* Đổi font thư pháp chuẩn xịn */
-    font-size: 16px; 
+    font-family: 'EB Garamond', serif; 
+    font-size: 12px; 
     font-weight: 700;
-    line-height: 1.4;
-    overflow: hidden; /* Dư chữ sẽ tự động giấu thay vì tràn lẹm viền */
+    line-height: 1.3;
 }
 
 .controls {
