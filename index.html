@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vũ Trụ Của Chúng Ta</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <!-- Hệ thống tự động tải font EB Garamond (Dòng hướng dẫn) và Great Vibes (Chữ trên lá bài) từ Google -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -13,20 +14,20 @@
     </div>
     
     <div class="card-container" id="cardContainer">
-        <!-- Trải 13 lá bài ma thuật -->
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
-        <div class="card" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <!-- 13 LÁ BÀI (Thêm class "stacked" để lúc mới vào web bài tụ lại 1 cọc) -->
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
+        <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
     </div>
 
     <div class="controls">
