@@ -24,28 +24,39 @@ const messages = [
     "Mình nghiêng về khả năng mình nhớ cún hơn, nhưng khả năng cún nhớ mình vẫn chưa bị loại trừ (chắc thế)."
 ];
 
-// Hàm bốc ngẫu nhiên 1 câu
-function getRandomMessage() {
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    return messages[randomIndex];
+let isPicked = false; 
+
+function pickCard(selectedCard) {
+    if (isPicked) return;
+    isPicked = true;
+
+    document.getElementById('instructionText').innerText = "Vũ trụ đã hồi đáp...";
+
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+    selectedCard.querySelector('.message-text').innerText = randomMsg;
+
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+        if (card === selectedCard) {
+            card.classList.add('picked');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+
+    setTimeout(() => {
+        document.getElementById('resetButton').style.display = 'inline-block';
+    }, 1500);
 }
 
-// Lắng nghe sự kiện click vào nút bấm
-document.getElementById('drawButton').addEventListener('click', function() {
-    const card = document.getElementById('gachaCard');
-    const messageDisplay = document.getElementById('messageDisplay');
+function resetCards() {
+    isPicked = false; 
     
-    // Kiểm tra xem bài đã lật chưa (chỉ cho lật 1 lần)
-    if (!card.classList.contains('flipped')) {
-        
-        // 1. Lấy chữ nhét vào HTML
-        messageDisplay.innerText = getRandomMessage();
-        
-        // 2. Kích hoạt hiệu ứng lật 3D
-        card.classList.add('flipped');
-        
-        // 3. Đổi trạng thái nút bấm
-        this.innerText = "ĐÃ NHẬN THÔNG ĐIỆP";
-        this.disabled = true; 
-    }
-});
+    document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
+    document.getElementById('resetButton').style.display = 'none';
+
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+        card.classList.remove('picked', 'hidden');
+    });
+}
