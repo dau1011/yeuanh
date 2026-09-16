@@ -105,7 +105,7 @@ body {
 /* KHI BỊ CHỌN: Căn chỉnh lại để đứng giữa màn hình hoàn hảo */
 .card.picked {
     /* Ép rotateZ(0deg) để bài đứng thẳng, scale(2.1) để vừa vặn ko bị lẹm viền */
-    transform: rotateZ(0deg) rotateY(180deg) scale(2.1) translateY(-20px) !important;
+    transform: rotateZ(0deg) rotateY(180deg) scale(2.0) translateY(-20px) !important;
     z-index: 200 !important;
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
