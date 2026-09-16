@@ -24,26 +24,22 @@ const messages = [
     "Mình nghiêng về khả năng mình nhớ cún hơn, nhưng khả năng cún nhớ mình vẫn chưa bị loại trừ (chắc thế)."
 ];
 
-// Khóa bấm khi mới vào web để chạy hiệu ứng chia bài
 let isPicked = true; 
 
 window.onload = () => {
-    // Đợi 0.5s rồi phát bài bay từ cọc ra
     setTimeout(dealCards, 500); 
 };
 
-// Hàm Ma Thuật: Phát bài từ cọc (Dealing)
 function dealCards() {
     const allCards = document.querySelectorAll('.card');
     
-    // Rút từng lá từ cọc bên phải phóng ra thành hình quạt
+    // Bài bay từ cọc góc phải ra màn hình
     allCards.forEach((card, index) => {
         setTimeout(() => {
             card.classList.remove('stacked');
-        }, index * 90); // Mỗi lá bay ra cách nhau 0.09 giây
+        }, index * 90); 
     });
 
-    // Sau khi lá cuối cùng bay ra xong thì mới cho phép người dùng bốc bài
     setTimeout(() => {
         document.getElementById('instructionText').innerText = "Hãy chạm vào một lá bài thuộc về anh...";
         isPicked = false;
@@ -81,13 +77,11 @@ function resetCards() {
 
     const allCards = document.querySelectorAll('.card');
     
-    // Trả tất cả bài về lại cọc bên tay phải
     allCards.forEach(card => {
         card.classList.remove('picked', 'hidden');
         card.classList.add('stacked');
     });
 
-    // Đợi 0.7s để gom bài xong thì xòe ra lại
     setTimeout(() => {
         document.getElementById('instructionText').innerText = "Đang chia bài...";
         dealCards();
