@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vũ Trụ Của Chúng Ta</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Hệ thống tự động tải font EB Garamond (Dòng hướng dẫn) và Great Vibes (Chữ trên lá bài) từ Google -->
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <!-- Cập nhật Font: Thêm Dancing Script cho chữ trên lá bài siêu đẹp -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -14,7 +14,15 @@
     </div>
     
     <div class="card-container" id="cardContainer">
-        <!-- 13 LÁ BÀI (Thêm class "stacked" để lúc mới vào web bài tụ lại 1 cọc) -->
+        <!-- CỌC BÀI GỐC ĐỂ DÀNH BÊN PHẢI (Chỉ để trang trí cho chân thật) -->
+        <div class="deck-pile">
+            <img src="1.png" class="dummy-card">
+            <img src="1.png" class="dummy-card">
+            <img src="1.png" class="dummy-card">
+            <img src="1.png" class="dummy-card">
+        </div>
+
+        <!-- 13 LÁ BÀI SẼ ĐƯỢC CHIA TỪ CỌC RA (Đều có class stacked ban đầu) -->
         <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
         <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
         <div class="card stacked" onclick="pickCard(this)"><div class="card-face card-back"><img src="1.png" alt="Mặt sau"></div><div class="card-face card-front"><img src="2.png" alt="Mặt trước"><div class="message-text"></div></div></div>
@@ -31,7 +39,7 @@
     </div>
 
     <div class="controls">
-        <p id="instructionText">Hãy chạm vào một lá bài thuộc về anh...</p>
+        <p id="instructionText">Đang chẻ bài...</p>
         <button id="resetButton" onclick="resetCards()">TRỘN BÀI VÀ RÚT TIẾP</button>
     </div>
 
