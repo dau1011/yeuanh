@@ -1,4 +1,3 @@
-/* Tải file font MTD Valky Bold từ GitHub */
 @font-face {
     font-family: 'MTD Valky Bold';
     src: url('valky.ttf') format('truetype'); 
@@ -17,14 +16,14 @@ body {
     overflow: hidden;
 }
 
-.header { position: relative; z-index: 5; }
+.header { position: relative; z-index: 5; margin-top: 10px; }
 
 .header h1 {
     font-family: 'MTD Valky Bold', serif; 
     color: #FDFD96; 
-    font-size: 36px; 
+    font-size: 34px; 
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-shadow: 0 0 15px rgba(253, 253, 150, 0.4); 
     text-align: center;
 }
@@ -32,75 +31,81 @@ body {
 .card-container {
     position: relative;
     width: 100%;
-    height: 420px; 
+    max-width: 500px;
+    height: 480px; /* Tăng không gian để bài lật lên không bị đụng trần */
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1000px;
+    perspective: 1200px;
     z-index: 100; 
 }
 
+/* --- CỌC BÀI GỐC BÊN TAY PHẢI --- */
+.deck-pile {
+    position: absolute;
+    width: 100px; /* Bằng size bài lúc xòe */
+    height: 150px;
+    /* Đặt góc dưới bên phải */
+    transform: translate(100px, 80px) rotateZ(12deg); 
+    z-index: 1; 
+}
+.dummy-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: -2px 2px 8px rgba(0,0,0,0.6);
+}
+/* Hiệu ứng các lá bài xếp chồng lên nhau có độ dày */
+.dummy-card:nth-child(1) { transform: translate(6px, 6px) rotate(3deg); }
+.dummy-card:nth-child(2) { transform: translate(4px, 4px) rotate(1deg); }
+.dummy-card:nth-child(3) { transform: translate(2px, 2px) rotate(-1deg); }
+.dummy-card:nth-child(4) { transform: translate(0, 0) rotate(0deg); }
+
+/* --- CÁC LÁ BÀI RÚT --- */
 .card {
     position: absolute;
-    width: 95px; 
+    width: 100px; /* TĂNG SIZE BÀI XÒE */
     aspect-ratio: 2 / 3;
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform-origin: center 200%; 
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: center 220%; /* Trục xoay tối ưu để xòe đều */
     cursor: pointer;
     transform-style: preserve-3d;
     transform: rotateZ(var(--rot)); 
 }
 
 /* Các góc xòe bài */
-.card:nth-child(1) { --rot: -48deg; z-index: 1; }
-.card:nth-child(2) { --rot: -40deg; z-index: 2; }
-.card:nth-child(3) { --rot: -32deg; z-index: 3; }
-.card:nth-child(4) { --rot: -24deg; z-index: 4; }
-.card:nth-child(5) { --rot: -16deg; z-index: 5; }
-.card:nth-child(6) { --rot: -8deg;  z-index: 6; }
-.card:nth-child(7) { --rot: 0deg;   z-index: 7; }
-.card:nth-child(8) { --rot: 8deg;   z-index: 8; }
-.card:nth-child(9) { --rot: 16deg;  z-index: 9; }
-.card:nth-child(10){ --rot: 24deg;  z-index: 10; }
-.card:nth-child(11){ --rot: 32deg;  z-index: 11; }
-.card:nth-child(12){ --rot: 40deg;  z-index: 12; }
-.card:nth-child(13){ --rot: 48deg;  z-index: 13; }
+.card:nth-child(2) { --rot: -48deg; z-index: 2; }
+.card:nth-child(3) { --rot: -40deg; z-index: 3; }
+.card:nth-child(4) { --rot: -32deg; z-index: 4; }
+.card:nth-child(5) { --rot: -24deg; z-index: 5; }
+.card:nth-child(6) { --rot: -16deg; z-index: 6; }
+.card:nth-child(7) { --rot: -8deg;  z-index: 7; }
+.card:nth-child(8) { --rot: 0deg;   z-index: 8; }
+.card:nth-child(9) { --rot: 8deg;   z-index: 9; }
+.card:nth-child(10){ --rot: 16deg;  z-index: 10; }
+.card:nth-child(11){ --rot: 24deg;  z-index: 11; }
+.card:nth-child(12){ --rot: 32deg;  z-index: 12; }
+.card:nth-child(13){ --rot: 40deg;  z-index: 13; }
+.card:nth-child(14){ --rot: 48deg;  z-index: 14; }
 
-/* -------------------------------------- */
-/* MA THUẬT XÀO BÀI (SHUFFLE ANIMATIONS)  */
-/* -------------------------------------- */
-
-/* 1. Trạng thái tụ bài thành 1 cọc thẳng đứng */
+/* TRẠNG THÁI CHƯA CHIA: Nằm đúng ngay cọc bài gốc */
 .card.stacked {
-    transform: translateY(40px) rotateZ(0deg) !important;
+    transform: translate(100px, 80px) rotateZ(12deg) !important;
     z-index: 10 !important;
 }
 
-/* 2. Chẻ nửa bộ bài sang trái và phải để xào */
-.card.shuffling-left { animation: shuffleLeft 0.5s ease-in-out 2; }
-.card.shuffling-right { animation: shuffleRight 0.5s ease-in-out 2; }
-
-@keyframes shuffleLeft {
-    0% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
-    50% { transform: translateY(40px) translateX(-55px) rotate(-10deg); z-index: 15; }
-    100% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
-}
-
-@keyframes shuffleRight {
-    0% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
-    50% { transform: translateY(40px) translateX(55px) rotate(10deg); z-index: 15; }
-    100% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
-}
-/* -------------------------------------- */
-
-/* Rút nhô lên khi lướt tay vào */
+/* Lướt chuột */
 .card:hover:not(.stacked) {
     transform: rotateZ(var(--rot)) translateY(-15px) scale(1.05);
     z-index: 150 !important;
 }
 
+/* KHI BỊ CHỌN: Căn chỉnh lại để đứng giữa màn hình hoàn hảo */
 .card.picked {
-    transform: rotateY(180deg) scale(2.5) translateY(-10px) !important;
+    /* Ép rotateZ(0deg) để bài đứng thẳng, scale(2.1) để vừa vặn ko bị lẹm viền */
+    transform: rotateZ(0deg) rotateY(180deg) scale(2.1) translateY(-20px) !important;
     z-index: 200 !important;
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
@@ -117,7 +122,7 @@ body {
     height: 100%;
     backface-visibility: hidden; 
     border-radius: 8px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 .card-face img {
@@ -129,22 +134,24 @@ body {
 
 .card-front { transform: rotateY(180deg); }
 
+/* KHẮC PHỤC LỖI FONT VÀ TRÀN CHỮ */
 .message-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 82%; 
+    width: 85%; 
     height: 75%; 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #5A0001; 
-    font-family: 'Great Vibes', cursive; /* Font chống lỗi Tiếng Việt */
-    font-size: 15px; 
-    font-weight: normal;
-    line-height: 1.3;
+    font-family: 'Dancing Script', cursive; /* Đổi font thư pháp chuẩn xịn */
+    font-size: 16px; 
+    font-weight: 700;
+    line-height: 1.4;
+    overflow: hidden; /* Dư chữ sẽ tự động giấu thay vì tràn lẹm viền */
 }
 
 .controls {
@@ -158,9 +165,9 @@ body {
 
 #instructionText {
     color: #D4AF37;
-    font-family: 'EB Garamond', serif; /* ĐÃ ÁP DỤNG FONT EB GARAMOND */
+    font-family: 'EB Garamond', serif; 
     font-size: 1.4rem; 
-    margin-top: 10px;
+    margin-top: 5px;
     font-style: italic;
     text-shadow: 0 0 5px rgba(0,0,0,0.8);
     animation: pulse 2s infinite;
@@ -178,7 +185,7 @@ body {
     color: #D4AF37;
     padding: 10px 25px;
     font-size: 15px;
-    font-family: 'MTD Valky Bold', serif; /* ĐÃ ÁP DỤNG FONT VALKY */
+    font-family: 'MTD Valky Bold', serif; 
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s;
