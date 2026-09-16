@@ -27,7 +27,7 @@ body {
 
 .card-container {
     width: 85vw; /* Tối ưu cho màn hình điện thoại */
-    max-width: 350px; /* Giới hạn kích thước trên laptop */
+    max-width: 300px; /* Giới hạn kích thước trên laptop */
     aspect-ratio: 2 / 3; /* Giữ chuẩn tỷ lệ khung hình lá bài */
     perspective: 1000px; /* Chiều sâu không gian 3D */
     margin-bottom: 40px;
