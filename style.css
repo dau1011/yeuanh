@@ -1,17 +1,20 @@
-/* Tải font chữ Blosta Script */
+/* Tải font chữ cho Lời nhắn */
 @font-face {
     font-family: 'Blosta Script';
-    src: url('blosta.ttf') format('truetype'); 
+    src: url('blosta.otf') format('truetype'); 
+}
+
+/* Tải font chữ cho Tiêu đề */
+@font-face {
+    font-family: 'MTD Valky Bold';
+    src: url('valky.otf') format('truetype'); 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-image: url('bg.jpg'); 
-    background-size: cover;          
-    background-position: center;     
-    background-attachment: fixed;    
-    background-color: #5A0001;       
+    /* NỀN XANH ĐEN VŨ TRỤ */
+    background: radial-gradient(circle at center, #1F2C46 0%, #0B101A 100%);
     font-family: 'Playfair Display', serif;
     display: flex;
     flex-direction: column;
@@ -21,38 +24,44 @@ body {
     overflow: hidden;
 }
 
+.header {
+    position: relative;
+    z-index: 5;
+}
+
 .header h1 {
+    font-family: 'MTD Valky Bold', serif; /* ÁP DỤNG FONT TIÊU ĐỀ MỚI */
     color: #FDFD96; 
-    font-size: 26px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    font-size: 36px; /* Valky khá sắc nét nên cho size to xíu sẽ rất uy lực */
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(253, 253, 150, 0.4); /* Ánh hào quang vàng nhẹ */
     text-align: center;
-    z-index: 50;
 }
 
 .card-container {
     position: relative;
     width: 100%;
-    height: 380px; 
+    height: 420px; 
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1000px;
-    margin-top: 10px;
+    z-index: 100; 
 }
 
 .card {
     position: absolute;
-    width: 75px; 
+    width: 95px; /* Size bài đã được căn chỉnh lớn dễ bấm */
     aspect-ratio: 2 / 3;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform-origin: center 250%; 
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center 200%; 
     cursor: pointer;
     transform-style: preserve-3d;
     transform: rotateZ(var(--rot)); 
 }
 
-/* Xếp quạt 13 lá */
+/* Góc xoay 13 lá */
 .card:nth-child(1) { --rot: -48deg; z-index: 1; }
 .card:nth-child(2) { --rot: -40deg; z-index: 2; }
 .card:nth-child(3) { --rot: -32deg; z-index: 3; }
@@ -68,20 +77,19 @@ body {
 .card:nth-child(13){ --rot: 48deg;  z-index: 13; }
 
 .card:hover {
-    transform: rotateZ(var(--rot)) translateY(-25px);
-    z-index: 20 !important;
+    transform: rotateZ(var(--rot)) translateY(-30px);
+    z-index: 150 !important;
 }
 
-/* Phóng to lá bài được chọn */
 .card.picked {
-    transform: rotateY(180deg) scale(2.8) translateY(-15px) !important;
-    z-index: 30 !important;
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+    transform: rotateY(180deg) scale(2.5) translateY(-10px) !important;
+    z-index: 200 !important;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
 
 .card.hidden {
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none; 
     transform: translateY(200px) rotateZ(var(--rot)) !important;
 }
 
@@ -91,7 +99,7 @@ body {
     height: 100%;
     backface-visibility: hidden; 
     border-radius: 8px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
 }
 
 .card-face img {
@@ -114,14 +122,23 @@ body {
     text-align: center;
     color: #5A0001; 
     font-family: 'Blosta Script', cursive; 
-    font-size: 11px; 
+    font-size: 13px; 
     line-height: 1.4;
+}
+
+.controls {
+    position: relative;
+    z-index: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80px;
 }
 
 #instructionText {
     color: #D4AF37;
     font-size: 1.1rem;
-    margin-top: 15px;
+    margin-top: 10px;
     font-style: italic;
     text-shadow: 0 0 5px rgba(0,0,0,0.8);
     animation: pulse 2s infinite;
@@ -144,7 +161,7 @@ body {
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 15px;
+    margin-top: 10px;
     display: none; 
     letter-spacing: 1px;
 }
