@@ -73,7 +73,7 @@ body {
     cursor: pointer;
     transform-style: preserve-3d;
     transform: rotateZ(var(--rot));
-    border-radius: 12px; /* Thêm bo góc cho khung chính */
+    border-radius: 12px; 
 }
 
 .card:nth-child(2) { --rot: -48deg; z-index: 2; }
@@ -100,14 +100,12 @@ body {
     z-index: 150 !important;
 }
 
-/* KHI LẬT BÀI: Xóa hào quang ở đây để không bị lộ góc vuông */
 .card.picked {
     transform-origin: center center !important; 
     transform: rotateZ(0deg) rotateY(180deg) scale(2.2) !important;
     z-index: 200 !important;
 }
 
-/* ĐƯA HÀO QUANG VÀO ĐÂY: Áp dụng trực tiếp lên mặt bài đã bo tròn */
 .card.picked .card-face {
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
@@ -139,14 +137,15 @@ body {
 
 .card-front { transform: rotateY(180deg); }
 
-/* CĂN CHỈNH LẠI KHUNG CHỮ: Đẩy tâm lên 42% để vừa đúng phần màu trắng be */
+/* --- CĂN CHỈNH LẠI KHUNG CHỮ CHUẨN XÁC VÀO VÙNG TRẮNG --- */
 .message-text {
     position: absolute;
-    top: 42%;  /* <-- Tâm điểm mới, khớp tuyệt đối với vùng màu be */
+    top: 44%;  /* Tâm điểm căn đúng vào giữa khoảng trống màu be */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 72%; 
-    height: 50%; /* Giới hạn để chữ không tràn xuống phần màu đỏ */
+    
+    width: 62%;  /* Bóp hẹp hai bên lại để né hoa văn trái/phải */
+    height: 45%; /* Giới hạn chiều cao để né hoa văn trên/dưới */
     
     display: flex;
     align-items: center;
@@ -155,9 +154,9 @@ body {
     color: #5A0001; 
     
     font-family: 'EB Garamond', serif; 
-    font-size: 9px; /* Trả về đúng size 9px */
+    font-size: 6.5px; /* Hạ size chữ xuống để lọt thỏm vào trong */
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 .controls {
