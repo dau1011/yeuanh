@@ -40,13 +40,13 @@ body {
     z-index: 100; 
 }
 
-/* --- CỌC BÀI GỐC BÊN TAY PHẢI (ĐÃ ĐƯỢC ĐẨY XA HƠN) --- */
+/* --- ĐẨY CỌC BÀI GỐC RA XA KHỎI TẦM BÀI XÒE --- */
 .deck-pile {
     position: absolute;
     width: 100px; 
     height: 150px;
-    /* Dịch chuyển mạnh xuống góc dưới cùng bên phải */
-    transform: translate(140px, 170px) rotateZ(15deg); 
+    /* Tăng thông số translate lên để đẩy nó ra tít ngoài góc phải */
+    transform: translate(180px, 240px) rotateZ(20deg); 
     z-index: 1; 
 }
 .dummy-card {
@@ -62,7 +62,7 @@ body {
 .dummy-card:nth-child(3) { transform: translate(2px, 2px) rotate(-1deg); }
 .dummy-card:nth-child(4) { transform: translate(0, 0) rotate(0deg); }
 
-/* --- CÁC LÁ BÀI SẼ CHIA --- */
+/* --- CÁC LÁ BÀI RÚT --- */
 .card {
     position: absolute;
     width: 100px; 
@@ -88,9 +88,9 @@ body {
 .card:nth-child(13){ --rot: 40deg;  z-index: 13; }
 .card:nth-child(14){ --rot: 48deg;  z-index: 14; }
 
-/* TRẠNG THÁI NẰM Ở CỌC (Trùng khớp 100% với vị trí Cọc bài gốc) */
+/* Trạng thái nằm chờ ở cọc (Khớp vị trí cọc bài gốc) */
 .card.stacked {
-    transform: translate(140px, 170px) rotateZ(15deg) !important;
+    transform: translate(180px, 240px) rotateZ(20deg) !important;
     z-index: 10 !important;
 }
 
@@ -99,9 +99,11 @@ body {
     z-index: 150 !important;
 }
 
-/* KHI BỊ CHỌN: Phóng to giữa màn hình */
+/* --- FIX TRỌNG TÂM LÁ BÀI KHI CHỌN ĐỂ KHÔNG BỊ CẮT XÉN --- */
 .card.picked {
-    transform: rotateZ(0deg) rotateY(180deg) scale(2.2) translateY(10px) !important;
+    /* Đổi trọng tâm về chính giữa lá bài để phóng to tại chỗ */
+    transform-origin: center center !important; 
+    transform: rotateZ(0deg) rotateY(180deg) scale(2.2) !important;
     z-index: 200 !important;
     box-shadow: 0 0 40px rgba(212, 175, 55, 1);
 }
@@ -130,13 +132,13 @@ body {
 
 .card-front { transform: rotateY(180deg); }
 
-/* CHỮ TRÊN LÁ BÀI */
+/* --- FIX SIZE CHỮ VỀ ĐÚNG 9PX THEO YÊU CẦU --- */
 .message-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%; 
+    width: 82%; 
     height: 75%; 
     display: flex;
     align-items: center;
@@ -144,8 +146,8 @@ body {
     text-align: center;
     color: #5A0001; 
     
-    font-family: 'EB Garamond', serif; /* Font EB Garamond */
-    font-size: 12px; /* Kích thước 12 chuẩn chỉ */
+    font-family: 'EB Garamond', serif; 
+    font-size: 9px; /* Hạ hẳn xuống 9px */
     font-weight: 700;
     line-height: 1.3;
 }
