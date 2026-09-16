@@ -1,19 +1,12 @@
-/* Tải font chữ cho Lời nhắn */
-@font-face {
-    font-family: 'Blosta Script';
-    src: url('blosta.otf') format('truetype'); 
-}
-
-/* Tải font chữ cho Tiêu đề */
+/* Tải file font MTD Valky Bold từ GitHub */
 @font-face {
     font-family: 'MTD Valky Bold';
-    src: url('valky.otf') format('truetype'); 
+    src: url('valky.ttf') format('truetype'); 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    /* NỀN XANH ĐEN VŨ TRỤ */
     background: radial-gradient(circle at center, #1F2C46 0%, #0B101A 100%);
     font-family: 'Playfair Display', serif;
     display: flex;
@@ -24,18 +17,15 @@ body {
     overflow: hidden;
 }
 
-.header {
-    position: relative;
-    z-index: 5;
-}
+.header { position: relative; z-index: 5; }
 
 .header h1 {
-    font-family: 'MTD Valky Bold', serif; /* ÁP DỤNG FONT TIÊU ĐỀ MỚI */
+    font-family: 'MTD Valky Bold', serif; 
     color: #FDFD96; 
-    font-size: 36px; /* Valky khá sắc nét nên cho size to xíu sẽ rất uy lực */
+    font-size: 36px; 
     letter-spacing: 2px;
     margin-bottom: 10px;
-    text-shadow: 0 0 15px rgba(253, 253, 150, 0.4); /* Ánh hào quang vàng nhẹ */
+    text-shadow: 0 0 15px rgba(253, 253, 150, 0.4); 
     text-align: center;
 }
 
@@ -52,16 +42,16 @@ body {
 
 .card {
     position: absolute;
-    width: 95px; /* Size bài đã được căn chỉnh lớn dễ bấm */
+    width: 95px; 
     aspect-ratio: 2 / 3;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     transform-origin: center 200%; 
     cursor: pointer;
     transform-style: preserve-3d;
     transform: rotateZ(var(--rot)); 
 }
 
-/* Góc xoay 13 lá */
+/* Các góc xòe bài */
 .card:nth-child(1) { --rot: -48deg; z-index: 1; }
 .card:nth-child(2) { --rot: -40deg; z-index: 2; }
 .card:nth-child(3) { --rot: -32deg; z-index: 3; }
@@ -76,8 +66,36 @@ body {
 .card:nth-child(12){ --rot: 40deg;  z-index: 12; }
 .card:nth-child(13){ --rot: 48deg;  z-index: 13; }
 
-.card:hover {
-    transform: rotateZ(var(--rot)) translateY(-30px);
+/* -------------------------------------- */
+/* MA THUẬT XÀO BÀI (SHUFFLE ANIMATIONS)  */
+/* -------------------------------------- */
+
+/* 1. Trạng thái tụ bài thành 1 cọc thẳng đứng */
+.card.stacked {
+    transform: translateY(40px) rotateZ(0deg) !important;
+    z-index: 10 !important;
+}
+
+/* 2. Chẻ nửa bộ bài sang trái và phải để xào */
+.card.shuffling-left { animation: shuffleLeft 0.5s ease-in-out 2; }
+.card.shuffling-right { animation: shuffleRight 0.5s ease-in-out 2; }
+
+@keyframes shuffleLeft {
+    0% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
+    50% { transform: translateY(40px) translateX(-55px) rotate(-10deg); z-index: 15; }
+    100% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
+}
+
+@keyframes shuffleRight {
+    0% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
+    50% { transform: translateY(40px) translateX(55px) rotate(10deg); z-index: 15; }
+    100% { transform: translateY(40px) translateX(0) rotate(0deg); z-index: 10; }
+}
+/* -------------------------------------- */
+
+/* Rút nhô lên khi lướt tay vào */
+.card:hover:not(.stacked) {
+    transform: rotateZ(var(--rot)) translateY(-15px) scale(1.05);
     z-index: 150 !important;
 }
 
@@ -109,21 +127,24 @@ body {
     border-radius: 8px;
 }
 
-.card-front {
-    transform: rotateY(180deg);
-}
+.card-front { transform: rotateY(180deg); }
 
 .message-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 85%; 
+    width: 82%; 
+    height: 75%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: #5A0001; 
-    font-family: 'Blosta Script', cursive; 
-    font-size: 13px; 
-    line-height: 1.4;
+    font-family: 'Great Vibes', cursive; /* Font chống lỗi Tiếng Việt */
+    font-size: 15px; 
+    font-weight: normal;
+    line-height: 1.3;
 }
 
 .controls {
@@ -137,7 +158,8 @@ body {
 
 #instructionText {
     color: #D4AF37;
-    font-size: 1.1rem;
+    font-family: 'EB Garamond', serif; /* ĐÃ ÁP DỤNG FONT EB GARAMOND */
+    font-size: 1.4rem; 
     margin-top: 10px;
     font-style: italic;
     text-shadow: 0 0 5px rgba(0,0,0,0.8);
@@ -154,10 +176,9 @@ body {
     background-color: rgba(0, 0, 0, 0.5); 
     border: 2px solid #D4AF37;
     color: #D4AF37;
-    padding: 12px 30px;
-    font-size: 14px;
-    font-family: 'Playfair Display', serif;
-    font-weight: bold;
+    padding: 10px 25px;
+    font-size: 15px;
+    font-family: 'MTD Valky Bold', serif; /* ĐÃ ÁP DỤNG FONT VALKY */
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s;
