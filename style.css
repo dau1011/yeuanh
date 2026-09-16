@@ -1,0 +1,106 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    background-color: #5A0001; /* Đỏ rượu */
+    font-family: 'Playfair Display', serif; /* Font chữ lãng mạn */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.header h1 {
+    color: #FDFD96; /* Vàng pastel */
+    font-size: 26px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.card-container {
+    width: 85vw; /* Tối ưu cho màn hình điện thoại */
+    max-width: 350px; /* Giới hạn kích thước trên laptop */
+    aspect-ratio: 2 / 3; /* Giữ chuẩn tỷ lệ khung hình lá bài */
+    perspective: 1000px; /* Chiều sâu không gian 3D */
+    margin-bottom: 40px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+/* Class được kích hoạt khi bấm nút */
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Giấu mặt phía sau khi lật */
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.card-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+}
+
+/* Chữ hiển thị đè lên ảnh mặt trước */
+.message-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%; /* Giữ chữ gọn gàng trong vùng nền kem */
+    text-align: center;
+    color: #5A0001; /* Chữ màu đỏ sẫm */
+    font-size: 1.15rem;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.controls button {
+    background-color: transparent;
+    border: 2px solid #D4AF37; /* Viền màu Gold */
+    color: #D4AF37;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    border-radius: 30px; /* Bo tròn dạng viên thuốc */
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.controls button:hover {
+    background-color: #D4AF37;
+    color: #5A0001;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+.controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
